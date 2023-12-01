@@ -18,3 +18,8 @@ td.Aire {
 .Ocupada {
     background-color: black!important;
 }
+
+.Selec {
+    border-color: yellow;
+    border-width: 2px;
+}

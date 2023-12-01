@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="../styles/Map.css">
+    </head>
+    <body>
+
+        <script>
+            let GridSizeX = 13;
+            let GridSizeY = 13;
+
+            window.onload = function() 
+            {
+                const body = document.body, tbl = document.createElement('table');
+
+                for (let i = 0; i < GridSizeX; i++) 
+                {
+                    const tr = tbl.insertRow();
+                    for (let j = 0; j < GridSizeY; j++) 
+                    {
+                        const td = tr.insertCell();
+                        td.id = i + "-" + j;
+                        td.addEventListener('click', (event) => {
+                            if(event.button == 0)
+                                ChangeState(td.id);
+                            //else if(event.button == 1)
+                                //ChangeZoneState(td.id);
+                        })
+                        td.addEventListener('contextmenu', (ev) => {
+                            ev.preventDefault();
+                            ChangeZoneState(td.id);
+                        });
+                        //td.appendChild(document.createTextNode(`${td.id}`));
+                    }
+                }
+                body.appendChild(tbl);
+            }
+
+            function ChangeState(IdCasilla) {
+                let Casilla = document.getElementById(IdCasilla);
+
+                if(Casilla.classList.contains("Aire")) {
+                    Casilla.classList.add("Mesa");
+                    Casilla.classList.remove("Aire");
+                }
+                else if (Casilla.classList.contains("Mesa")) {
+                    Casilla.classList.remove("Mesa");
+                }
+                else {
+                    Casilla.classList.add("Aire");
+                }
+            }
+
+            let PrimerCasilla = null;
+            let SegundaCasilla = null;
+            function ChangeZoneState(IdCasilla) {
+                if (PrimerCasilla == null) {
+                    IdCasillaA = IdCasilla;
+                    PrimerCasilla = document.getElementById(IdCasilla);
+                    PrimerCasilla.classList.add("Selec");
+                }
+                else 
+                {
+                    PrimerCasilla.classList.remove("Selec");
+                    SegundaCasilla = document.getElementById(IdCasilla);
+
+                    let cordsA = PrimerCasilla.id.split("-");
+                    let cordsB = SegundaCasilla.id.split("-");
+                    //alert(`X:${cords[0]}  Y:${cords[1]}`);
+                    //Rellenar Casillas entre A y B
+                    let ABiggerX = parseInt(cordsA[0]) <= parseInt(cordsB[0]);
+                    let ABiggerY = parseInt(cordsA[1]) <= parseInt(cordsB[1]);
+
+                    for(let x = cordsA[0]; 
+                        ABiggerX ? x <= parseInt(cordsB[0]) : x >= parseInt(cordsB[0]); 
+                        ABiggerX ? x++ : x--)
+                    {
+                        for(let y = cordsA[1]; 
+                            ABiggerY ? y <= parseInt(cordsB[1]) : y >= parseInt(cordsB[1]);
+                            ABiggerY ? y++ : y--) 
+                        {
+                            let idSel = x + "-" + y;
+                            //alert(idSel);
+                            console.log(idSel);
+                            CasillaRellenar = document.getElementById(idSel);
+                            ChangeState(idSel);
+                        }
+                    }
+
+                    PrimerCasilla = null;
+                    SegundaCasilla = null;
+                }
+            }
+        </script>
+    </body>
+</html>
