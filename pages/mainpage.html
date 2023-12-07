@@ -14,6 +14,38 @@
         <link rel="stylesheet" type="text/css" href="../styles/mainpage.css">
     </head>
     <body>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EatNow</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="filter-container">
+            <div>
+                <h2>Busca tu mesa adecuada para la ocasion</h2>
+            </div>
+            <div class="filter">
+                <input type="time">
+                <input type="date">
+                <input type="text">
+                <button class="btn submit">Buscar</button>
+            </div>
+        </div>
         <div class="container">
             <div class="restaurante">
                 <div class="cont-img">
@@ -124,58 +156,69 @@
                 </div>
             </div>
         </div>
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2023 - EatNow - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
         <script>
             var divs = document.querySelectorAll('.restaurante');
             var primerElemento = divs[0];
             var ultimoElemento = divs[divs.length - 1];
 
-            var defHeight = 35;
+            var defHeight = 40;
             var defWidth = 50;
 
             divs.forEach(function (elemento) {
                 elemento.addEventListener('mouseover', function() { Focus(elemento); });
+                elemento.addEventListener('mouseenter', function() { elemento.classList.add('selected'); });
+                elemento.addEventListener('mouseleave', function() { elemento.classList.remove('selected');});
             });
 
             function Focus(divWatch) {
-                divWatch.scrollIntoView({ behavior: "instant", block: "center", inline: "nearest" });
+                divWatch.scrollIntoView({ behavior: "instant", block: "center", inline: "center" });
                 UpdateSizeRestaurants();
             }
 
             document.addEventListener("DOMContentLoaded", UpdateSizeRestaurants);
             window.addEventListener('scroll', UpdateSizeRestaurants);
 
+            //pee = setInterval(UpdateSizeRestaurants, 10);
+
             function UpdateSizeRestaurants() {
                 var scrollPos = window.scrollY;
                 var centroVentana = window.innerHeight / 2;
 
                 divs.forEach(function (elemento) {
-                    var bounding = elemento.getBoundingClientRect();
-                    var center = (bounding.top + bounding.bottom) / 2;
-                    var distanciaCentro = Math.abs(center - centroVentana);
-                    var escala = distanciaCentro / centroVentana;
+                    if (elemento.classList.contains('selected')) {
+                        elemento.style.opacity = 1; 
+                        //elemento.innerHTML = 'Selected';
+                    }
+                    else 
+                    {
+                        var bounding = elemento.getBoundingClientRect();
+                        var center = (bounding.top + bounding.bottom) / 2;
+                        var distanciaCentro = Math.abs(center - centroVentana);
+                        var escala = distanciaCentro / centroVentana;
 
-                    if (escala > 1) escala = 1;
-                    if (escala < 0.4 && scrollPos != 0) escala = 0;
-                    //elemento.style.transform = 'scale(' + escala + ')';
+                        if (escala > 1) escala = 1;
+                        if (escala < 0.4 && scrollPos != 0) escala = 0;
+                        //elemento.style.transform = 'scale(' + escala + ')';
 
-                    var heightElement = defHeight - (escala * 20);
-                    var widthElement = defWidth - (escala * 10);
+                        var heightElement = defHeight - (escala * 20);
+                        var widthElement = defWidth - (escala * 10);
 
-                    elemento.style.height = heightElement.toFixed(5) + 'vh';
-                    elemento.style.width = widthElement.toFixed(5) + '%';
-                    //elemento.innerHTML = escala.toFixed(3);
+                        elemento.style.height = heightElement.toFixed(1) + 'vh';
+                        elemento.style.width = widthElement.toFixed(1) + '%';
+                        elemento.style.opacity = (1 - escala) + 0.2 ;
+                        //elemento.innerHTML = escala.toFixed(1);
+                    }
                 });
 
                 if (scrollPos == 0) {
                     primerElemento.style.height = defHeight + 'vh';
                     primerElemento.style.width = defWidth + '%';
-                    //primerElemento.innerHTML = 'TOP';
-                }
-                
-                if (scrollPos + window.innerHeight >= document.documentElement.scrollHeight) {
-                    ultimoElemento.style.height = defHeight + 'vh';
-                    ultimoElemento.style.width = defWidth + '%';
-                    //ultimoElemento.innerHTML = 'BOTTON';
+                    primerElemento.style.opacity = 1; 
                 }
             }
         </script>
