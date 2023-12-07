@@ -1,3 +1,9 @@
+/*COLOR 1: Blanco:  #F7F9F7  */
+/*COLOR 2: NARANJA: #EC992E  */
+/*COLOR 3: ROJO:    #E76954  */
+/*COLOR 4: MORADO:  #BD4760  */
+/*COLOR 5: NEGRO:   #25293A  */
+
 *, *:before, *:after{
     margin: 0 !important;
     padding: 0 !important;
@@ -11,7 +17,7 @@
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    background: -webkit-linear-gradient(left, #7579ff, #b224ef) !important;
+    background: -webkit-linear-gradient(left, #EC992E, #E76954) !important;
     font-family: 'Nunito', sans-serif !important;
   }
   
@@ -26,8 +32,8 @@
     position: relative !important;
     width: 900px !important;
     height: 550px !important;
-    background: #fff !important;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22) !important;
+    background: #F7F9F7 !important;
+    box-shadow: 0 19px 38px #25293A4d, 0 15px 12px #25293A38 !important;
     transition: height 1s ease-out;
   }
 
@@ -73,7 +79,7 @@
     margin-top: 5px !important;
     font-size: 16px !important;
     padding-bottom: 5px !important;
-    border-bottom: 1px solid rgba(109, 93, 93, 0.4) !important;
+    border-bottom: 1px solid #25293A66 !important;
     text-align: center !important;
     font-family: 'Nunito', sans-serif !important; 
   }
@@ -84,7 +90,7 @@
     width: 260px !important;
     height: 36px !important;
     border-radius: 30px !important;
-    color: #fff !important;
+    color: #F7F9F7 !important;
     font-size: 15px !important;
     cursor: pointer !important;
   }
@@ -95,7 +101,8 @@
     text-transform: uppercase !important;
     font-weight: 600 !important;
     font-family: 'Nunito', sans-serif !important;
-    background: -webkit-linear-gradient(left, #7579ff, #b224ef) !important;
+    background: -webkit-linear-gradient(left, #E76954, #BD4760) !important;
+    transition: background-color 2s ease-out;
   }
 
   .submit.register{
@@ -104,7 +111,8 @@
   }
   
   .submit:hover{
-    background: -webkit-linear-gradient(left, #b224ef, #7579ff) !important;
+    background: -webkit-linear-gradient(left, #EC992E, #E76954) !important;
+    transition: background-color 2s ease-out;
   }
   
   .forgot-pass{
@@ -112,12 +120,12 @@
     text-align: center;
     font-size: 14px;
     font-weight: 600;
-    color: #0c0101;
+    color: #25293A;
     cursor: pointer;
   }
   
   .forgot-pass:hover{
-    color: red;
+    color: #E76954;
   }
 
   .Question{
@@ -125,7 +133,7 @@
     text-align: center;
     font-size: 14px;
     font-weight: 600;
-    color: #0c0101;
+    color: #25293A;
     cursor: pointer;
   }
   
@@ -137,7 +145,7 @@
     width: 900px !important;
     height: 100% !important;
     padding-left: 260px !important;
-    background: #fff !important;
+    background: #F7F9F7 !important;
     -webkit-transition: -webkit-transform 1.2s ease-in-out !important;
     transition: -webkit-transform 1.2s ease-in-out !important;
     transition: transform 1.2s ease-in-out !important;
@@ -195,7 +203,7 @@
     width: 100%;
     padding: 0 20px;
     text-align: center;
-    color: #fff;
+    color: #F7F9F7;
     -webkit-transition:-webkit-transform 1.2s ease-in-out;
     transition: -webkit-transform 1.2s ease-in-out;
     transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;
@@ -250,7 +258,7 @@
     height: 36px !important;
     margin: 0 auto !important;
     background: transparent !important;
-    color: #fff !important;
+    color: #F7F9F7 !important;
     text-transform: uppercase !important;
     font-size: 15px !important;
     cursor: pointer !important;
@@ -264,7 +272,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    border: 2px solid #fff;
+    border: 2px solid #F7F9F7;
     border-radius: 30px;
   }
   
